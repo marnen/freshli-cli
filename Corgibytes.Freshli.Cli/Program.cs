@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Freshli;
+using Corgibytes.Freshli.Lib;
 using NLog;
 
 namespace Corgibytes.Freshli.Cli {
@@ -19,7 +19,10 @@ namespace Corgibytes.Freshli.Cli {
         var results = runner.Run(args[0]);
 
         var formatter = new OutputFormatter(Console.Out);
-        formatter.Write(results);
+        foreach (var result in results)
+        {
+          formatter.Write(result.Filename, result.MetricResults);
+        }
       } catch (Exception e) {
         logger.Error(
           e,

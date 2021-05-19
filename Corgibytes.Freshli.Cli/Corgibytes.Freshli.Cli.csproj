@@ -4,10 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Corgibytes.Freshli.Lib" Version="0.0.4" />
+    <!-- <PackageReference Include="Corgibytes.Freshli.Lib" Version="0.0.4" /> -->
     <PackageReference Include="GitVersion.MsBuild" Version="5.6.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <!-- this is a local instancet of the library, do not check this into main branch -->
+    <ProjectReference Include="../../freshli-lib/Corgibytes.Freshli.Lib/Corgibytes.Freshli.Lib.csproj" />
   </ItemGroup>
 </Project>

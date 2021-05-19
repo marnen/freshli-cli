@@ -1,6 +1,7 @@
 using Freshli;
 using System.Collections.Generic;
 using System.IO;
+using Corgibytes.Freshli.Lib;
 
 namespace Corgibytes.Freshli.Cli {
   public class OutputFormatter {
@@ -10,7 +11,10 @@ namespace Corgibytes.Freshli.Cli {
       _writer = writer;
     }
 
-    public void Write(IList<MetricsResult> results) {
+    public void Write(string filename, IList<MetricsResult> results) {
+      _writer.WriteLine(
+        filename
+      );
       _writer.WriteLine(
         "Date\t" +
         "LibYear\t" +
