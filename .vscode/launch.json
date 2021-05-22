@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Freshli.Cli/bin/Debug/net5.0/Freshli.Cli.dll",
+            "program": "${workspaceFolder}/Corgibytes.Freshli.Cli/bin/Debug/net5.0/Corgibytes.Freshli.Cli.dll",
             "args": ["${input:repo}"],
             "cwd": "${workspaceFolder}/Freshli.Cli",
             "console": "internalConsole",

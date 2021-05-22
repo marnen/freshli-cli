@@ -1,7 +1,8 @@
-using Freshli;
 using System.Collections.Generic;
 using System.IO;
 using Corgibytes.Freshli.Lib;
+using System.Linq;
+using ConsoleTables;
 
 namespace Corgibytes.Freshli.Cli {
   public class OutputFormatter {
@@ -13,23 +14,34 @@ namespace Corgibytes.Freshli.Cli {
 
     public void Write(string filename, IList<MetricsResult> results) {
       _writer.WriteLine(
-        filename
-      );
-      _writer.WriteLine(
-        "Date\t" +
-        "LibYear\t" +
-        "UpgradesAvailable\t" +
-        "Skipped"
+        $"Project filename: {filename}"
       );
 
-      foreach (var resultSet in results) {
-        _writer.WriteLine(
-          $"{resultSet.Date.ToString("yyyy/MM/dd")}\t" +
-          $"{resultSet.LibYear.Total:F4}\t" +
-          $"{resultSet.LibYear.UpgradesAvailable}\t" +
-          $"{resultSet.LibYear.Skipped}"
+      var currentResult = results.Last();
+      _writer.WriteLine(
+        $"LibYear: {currentResult.LibYear.Total}"
+      );
+
+      if (!currentResult.LibYear.Any()) { return; }
+      var table = new ConsoleTable(
+        new ConsoleTableOptions
+            {
+                Columns = new[] { "Package", "LibYear", "Current", "Latest" },
+                EnableCount = false
+            }      
+      );
+
+      foreach (var packageResult in currentResult.LibYear) {
+        table.AddRow(
+          packageResult.Name,
+          packageResult.Value,
+          packageResult.Version,
+          packageResult.LatestVersion
         );
       }
+
+      table.Write();
+      _writer.WriteLine("");
     }
   }
 }
